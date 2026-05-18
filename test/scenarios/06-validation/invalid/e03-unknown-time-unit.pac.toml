@@ -1,0 +1,12 @@
+[meta]
+spec_version = "0.0.1"
+
+# INVALID: time_unit = "sprints" is not a valid enum value.
+# Valid values: "hours", "days"
+# Expected: validation error, file rejected.
+
+[[project]]
+color = "#3B82F6"
+id = "01VRFY00000000000000000020"
+name = "Unknown Time Unit Test"
+time_unit = "sprints"

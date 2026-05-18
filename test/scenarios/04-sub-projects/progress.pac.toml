@@ -1,0 +1,72 @@
+[meta]
+spec_version = "0.0.1"
+
+# Sub-project progress test.
+#
+# Sub-project has three tasks with different durations and progress values.
+# Expected linked task progress (weighted average by plan.duration):
+#
+#   STASK1 (done):        plan.duration=5,  actual.progress=100
+#   STASK2 (in progress): plan.duration=10, actual.progress=50
+#   STASK3 (not started): plan.duration=3,  actual.progress=0
+#
+#   numerator   = (5*100) + (10*50) + (3*0) = 500 + 500 + 0 = 1000
+#   denominator = 5 + 10 + 3 = 18
+#   raw         = 1000 / 18 = 55.555...
+#   progress    = round(55.555) = 56
+#
+# The linked task's stored progress (56) is a cached value.
+# Implementations MUST recompute on load and MUST NOT treat the stored value
+# as authoritative (see §3.3).
+
+[[project]]
+color = "#3B82F6"
+id = "01SPRJ00000000000000000020"
+name = "Sub-project Progress - Parent"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01SPRJ00000000000000000021"
+name = "Feature Work (sub-project linked)"
+sub_project_id = "01SPRJ00000000000000000030"
+
+actual.progress = 56
+
+[[project]]
+color = "#8B5CF6"
+id = "01SPRJ00000000000000000030"
+linked_task_id = "01SPRJ00000000000000000021"
+name = "Feature Work Sub-project"
+parent_project_id = "01SPRJ00000000000000000020"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01SPRJ00000000000000000031"
+name = "Task 1 (done)"
+
+plan.duration = 5
+
+actual.duration = 5
+actual.progress = 100
+
+[[project.task]]
+dependencies = [
+  "01SPRJ00000000000000000031",
+]
+id = "01SPRJ00000000000000000032"
+name = "Task 2 (in progress)"
+
+plan.duration = 10
+
+actual.progress = 50
+
+[[project.task]]
+dependencies = [
+  "01SPRJ00000000000000000031",
+]
+id = "01SPRJ00000000000000000033"
+name = "Task 3 (not started)"
+
+plan.duration = 3

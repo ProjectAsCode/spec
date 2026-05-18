@@ -1,0 +1,18 @@
+[meta]
+spec_version = "0.0.1"
+
+# INVALID: Two [[project]] entries with no parent_project_id.
+# A file may contain at most one top-level project (no parent_project_id).
+# Expected: parse/validation error, file rejected.
+
+[[project]]
+color = "#3B82F6"
+id = "01VRFY00000000000000000001"
+name = "Project One"
+time_unit = "days"
+
+[[project]]
+color = "#10B981"
+id = "01VRFY00000000000000000002"
+name = "Project Two"
+time_unit = "days"

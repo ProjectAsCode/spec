@@ -1,0 +1,57 @@
+[meta]
+spec_version = "0.0.1"
+
+# Unconvert test.
+#
+# Sub-project has two tasks in sequence: STASK1 (plan.duration=5) -> STASK2 (plan.duration=7).
+# Sub-project forward pass: STASK1 EF=5, STASK2 EF=12. Total duration = max(EF) = 12.
+#
+# Before unconvert:
+#   - Parent task has sub_project_id set, no plan.duration.
+#   - Sub-project record exists with two sub-tasks and its own description/notes.
+#
+# After unconvert:
+#   - Parent task has plan.duration = 12 (the computed total).
+#   - Parent task's description and notes have the sub-project's appended (separated by blank lines).
+#   - Parent task's sub_project_id is cleared.
+#   - The sub-project record (and all its tasks) is removed from the file.
+
+[[project]]
+color = "#3B82F6"
+id = "01CNVT00000000000000000001"
+name = "Unconvert - Parent"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+description = "Original task description"
+id = "01CNVT00000000000000000002"
+name = "Feature Task"
+notes = "Original task notes"
+sub_project_id = "01CNVT00000000000000000010"
+
+[[project]]
+color = "#10B981"
+description = "Sub-project description"
+id = "01CNVT00000000000000000010"
+linked_task_id = "01CNVT00000000000000000002"
+name = "Feature Sub-project"
+notes = "Sub-project notes"
+parent_project_id = "01CNVT00000000000000000001"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01CNVT00000000000000000011"
+name = "Sub-task 1"
+
+plan.duration = 5
+
+[[project.task]]
+dependencies = [
+  "01CNVT00000000000000000011",
+]
+id = "01CNVT00000000000000000012"
+name = "Sub-task 2"
+
+plan.duration = 7

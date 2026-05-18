@@ -1,0 +1,20 @@
+[meta]
+spec_version = "0.0.1"
+
+# INVALID: progress = 101 is outside the valid range [0, 100].
+# Expected: validation error, file rejected.
+
+[[project]]
+color = "#3B82F6"
+id = "01VRFY00000000000000000060"
+name = "Progress Out of Range Test"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01VRFY00000000000000000061"
+name = "Task with invalid progress"
+
+plan.duration = 3
+
+actual.progress = 101

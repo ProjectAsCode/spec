@@ -1,0 +1,39 @@
+[meta]
+spec_version = "0.0.1"
+
+# parallelism = 1: two tasks, same priority, no deps.
+# Both tasks have equal priority (0). T001 has the smaller id, so it runs first.
+# T002 is delayed until T001 finishes.
+# Expected:
+#   T001 ES=0  EF=3.0
+#   T002 ES=3.0 EF=6.0
+
+[[project]]
+color = "#3B82F6"
+id = "01TPAR00000000000000000010"
+name = "Track Parallelism - Sequential"
+time_unit = "days"
+
+[[project.track]]
+color = "#10B981"
+id = "01TPAR00000000000000000011"
+name = "Dev"
+order = 0
+parallelism = 1
+project_id = "01TPAR00000000000000000010"
+
+[[project.task]]
+dependencies = []
+id = "01TPAR00000000000000000012"
+name = "Task A"
+track_id = "01TPAR00000000000000000011"
+
+plan.duration = 3
+
+[[project.task]]
+dependencies = []
+id = "01TPAR00000000000000000013"
+name = "Task B"
+track_id = "01TPAR00000000000000000011"
+
+plan.duration = 3

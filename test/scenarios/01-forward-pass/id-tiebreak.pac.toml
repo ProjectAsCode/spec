@@ -1,0 +1,35 @@
+[meta]
+spec_version = "0.0.1"
+
+# Three tasks with no dependencies and identical estimates.
+# All start at ES=0 (no parallelism constraint in this scenario).
+# Tasks are listed out of ID order intentionally to verify implementations
+# process them correctly regardless of file order.
+# Expected: all three tasks ES=0, EF=2.0
+
+[[project]]
+color = "#3B82F6"
+id = "01CPMF00000000000000000020"
+name = "CPM Forward - ID Tiebreak"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01CPMF00000000000000000023"
+name = "Task C"
+
+plan.duration = 2
+
+[[project.task]]
+dependencies = []
+id = "01CPMF00000000000000000021"
+name = "Task A"
+
+plan.duration = 2
+
+[[project.task]]
+dependencies = []
+id = "01CPMF00000000000000000022"
+name = "Task B"
+
+plan.duration = 2

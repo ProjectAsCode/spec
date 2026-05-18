@@ -1,0 +1,62 @@
+[meta]
+spec_version = "0.0.1"
+
+# parallelism = 1: four tasks, three without deps (A, B, D) and C depends on A.
+# D has the highest priority (10) and runs first at t=0.
+# A and B have equal priority (0); A has smaller id, so A runs second.
+# After A finishes, C becomes eligible but B is still waiting. B has smaller id than C,
+# so B runs third. C runs last.
+# Expected:
+#   D (id=...044) ES=0   EF=3.0
+#   A (id=...041) ES=3.0 EF=6.0
+#   B (id=...042) ES=6.0 EF=9.0
+#   C (id=...043) ES=9.0 EF=12.0 (depends on A; waits for B to finish track slot)
+
+[[project]]
+color = "#3B82F6"
+id = "01TPAR00000000000000000040"
+name = "Track Parallelism - Cascading"
+time_unit = "days"
+
+[[project.track]]
+color = "#10B981"
+id = "01TPAR00000000000000000045"
+name = "Dev"
+order = 0
+parallelism = 1
+project_id = "01TPAR00000000000000000040"
+
+[[project.task]]
+dependencies = []
+id = "01TPAR00000000000000000041"
+name = "Task A"
+track_id = "01TPAR00000000000000000045"
+
+plan.duration = 3
+
+[[project.task]]
+dependencies = []
+id = "01TPAR00000000000000000042"
+name = "Task B"
+track_id = "01TPAR00000000000000000045"
+
+plan.duration = 3
+
+[[project.task]]
+dependencies = [
+  "01TPAR00000000000000000041",
+]
+id = "01TPAR00000000000000000043"
+name = "Task C"
+track_id = "01TPAR00000000000000000045"
+
+plan.duration = 3
+
+[[project.task]]
+dependencies = []
+id = "01TPAR00000000000000000044"
+name = "Task D (high priority)"
+priority = 10
+track_id = "01TPAR00000000000000000045"
+
+plan.duration = 3

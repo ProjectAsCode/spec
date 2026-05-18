@@ -1,0 +1,30 @@
+[meta]
+spec_version = "0.0.1"
+
+# INVALID: Task A depends on Task B, and Task B depends on Task A.
+# Circular dependencies are not permitted.
+# Expected: validation error, file rejected.
+
+[[project]]
+color = "#3B82F6"
+id = "01VRFY00000000000000000040"
+name = "Circular Dependency Test"
+time_unit = "days"
+
+[[project.task]]
+dependencies = [
+  "01VRFY00000000000000000042",
+]
+id = "01VRFY00000000000000000041"
+name = "Task A"
+
+plan.duration = 3
+
+[[project.task]]
+dependencies = [
+  "01VRFY00000000000000000041",
+]
+id = "01VRFY00000000000000000042"
+name = "Task B"
+
+plan.duration = 3

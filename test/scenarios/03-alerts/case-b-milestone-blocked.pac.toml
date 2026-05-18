@@ -1,0 +1,51 @@
+[meta]
+spec_version = "0.0.1"
+
+# A and B feed into milestone M; X depends on M.
+# A is done (actual.progress = 100). B is not done. M is not yet reached.
+# X has only M as its predecessor; M's incomplete state is what gates X.
+# Expected: milestone M fires Blocked.
+
+[[project]]
+color = "#3B82F6"
+id = "01ALRT00000000000000000020"
+name = "Alerts - Case B - Milestone Blocked"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01ALRT00000000000000000021"
+name = "Task A (done)"
+
+plan.duration = 5
+
+actual.duration = 5
+actual.progress = 100
+
+[[project.task]]
+dependencies = []
+id = "01ALRT00000000000000000022"
+name = "Task B (in progress)"
+
+plan.duration = 5
+
+actual.progress = 60
+
+[[project.milestone]]
+color = "#F59E0B"
+dependencies = [
+  "01ALRT00000000000000000021",
+  "01ALRT00000000000000000022",
+]
+id = "01ALRT00000000000000000023"
+name = "Milestone M"
+project_id = "01ALRT00000000000000000020"
+
+[[project.task]]
+dependencies = [
+  "01ALRT00000000000000000023",
+]
+id = "01ALRT00000000000000000024"
+name = "Task X (gated by M)"
+
+plan.duration = 3

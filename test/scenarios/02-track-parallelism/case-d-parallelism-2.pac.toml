@@ -1,0 +1,48 @@
+[meta]
+spec_version = "0.0.1"
+
+# parallelism = 2: three tasks in the same track, no deps, equal priority.
+# At most 2 may run simultaneously. Tasks with smaller ids run first.
+# T001 and T002 run concurrently. T003 waits until one finishes (at EF=4.0).
+# Expected:
+#   Task A (id=...032) ES=0   EF=4.0
+#   Task B (id=...033) ES=0   EF=4.0
+#   Task C (id=...034) ES=4.0 EF=8.0
+
+[[project]]
+color = "#3B82F6"
+id = "01TPAR00000000000000000030"
+name = "Track Parallelism - Cap 2"
+time_unit = "days"
+
+[[project.track]]
+color = "#10B981"
+id = "01TPAR00000000000000000031"
+name = "Dev"
+order = 0
+parallelism = 2
+project_id = "01TPAR00000000000000000030"
+
+[[project.task]]
+dependencies = []
+id = "01TPAR00000000000000000032"
+name = "Task A"
+track_id = "01TPAR00000000000000000031"
+
+plan.duration = 4
+
+[[project.task]]
+dependencies = []
+id = "01TPAR00000000000000000033"
+name = "Task B"
+track_id = "01TPAR00000000000000000031"
+
+plan.duration = 4
+
+[[project.task]]
+dependencies = []
+id = "01TPAR00000000000000000034"
+name = "Task C"
+track_id = "01TPAR00000000000000000031"
+
+plan.duration = 4

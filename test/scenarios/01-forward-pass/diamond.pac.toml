@@ -1,0 +1,51 @@
+[meta]
+spec_version = "0.0.1"
+
+# Diamond dependency: T001 -> {T002, T003} -> T004
+# E values: T001=3.0, T002=4.0, T003=2.0, T004=2.0
+# Expected forward pass:
+#   T001 ES=0  EF=3
+#   T002 ES=3  EF=7
+#   T003 ES=3  EF=5
+#   T004 ES=7  EF=9  (waits for both T002 and T003; max(7,5)=7)
+
+[[project]]
+color = "#3B82F6"
+id = "01CPMF00000000000000000010"
+name = "CPM Forward - Diamond"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01CPMF00000000000000000011"
+name = "Task A"
+
+plan.duration = 3
+
+[[project.task]]
+dependencies = [
+  "01CPMF00000000000000000011",
+]
+id = "01CPMF00000000000000000012"
+name = "Task B"
+
+plan.duration = 4
+
+[[project.task]]
+dependencies = [
+  "01CPMF00000000000000000011",
+]
+id = "01CPMF00000000000000000013"
+name = "Task C"
+
+plan.duration = 2
+
+[[project.task]]
+dependencies = [
+  "01CPMF00000000000000000012",
+  "01CPMF00000000000000000013",
+]
+id = "01CPMF00000000000000000014"
+name = "Task D"
+
+plan.duration = 2

@@ -1,0 +1,37 @@
+[meta]
+spec_version = "0.0.1"
+
+# Linear chain: A -> B -> C.
+# A is not started. B has only A as a predecessor; A is the sole blocker for B.
+# Expected: task A fires Blocked. B and C do not (they have other unmet dependencies).
+
+[[project]]
+color = "#3B82F6"
+id = "01ALRT00000000000000000010"
+name = "Alerts - Case A - Task Blocked"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01ALRT00000000000000000001"
+name = "Task A"
+
+plan.duration = 3
+
+[[project.task]]
+dependencies = [
+  "01ALRT00000000000000000001",
+]
+id = "01ALRT00000000000000000002"
+name = "Task B"
+
+plan.duration = 4
+
+[[project.task]]
+dependencies = [
+  "01ALRT00000000000000000002",
+]
+id = "01ALRT00000000000000000003"
+name = "Task C"
+
+plan.duration = 2

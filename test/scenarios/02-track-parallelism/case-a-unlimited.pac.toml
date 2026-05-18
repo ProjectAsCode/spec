@@ -1,0 +1,37 @@
+[meta]
+spec_version = "0.0.1"
+
+# parallelism = 0 (unlimited): two tasks in same track, no deps.
+# Expected: both run at ES=0, no delay applied.
+# T001: ES=0 EF=3.0
+# T002: ES=0 EF=3.0
+
+[[project]]
+color = "#3B82F6"
+id = "01TPAR00000000000000000001"
+name = "Track Parallelism - Unlimited"
+time_unit = "days"
+
+[[project.track]]
+color = "#10B981"
+id = "01TPAR00000000000000000002"
+name = "Dev"
+order = 0
+parallelism = 0
+project_id = "01TPAR00000000000000000001"
+
+[[project.task]]
+dependencies = []
+id = "01TPAR00000000000000000003"
+name = "Task A"
+track_id = "01TPAR00000000000000000002"
+
+plan.duration = 3
+
+[[project.task]]
+dependencies = []
+id = "01TPAR00000000000000000004"
+name = "Task B"
+track_id = "01TPAR00000000000000000002"
+
+plan.duration = 3

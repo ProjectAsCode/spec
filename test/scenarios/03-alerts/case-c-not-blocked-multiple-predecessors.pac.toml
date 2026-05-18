@@ -1,0 +1,36 @@
+[meta]
+spec_version = "0.0.1"
+
+# A and B both feed into C. Both A and B are not started.
+# Neither A nor B is "the SOLE remaining blocker" for C: C has two missing predecessors.
+# Expected: no Blocked alert fires for either A or B.
+
+[[project]]
+color = "#3B82F6"
+id = "01ALRT00000000000000000030"
+name = "Alerts - Case C - Not Blocked (multiple missing predecessors)"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01ALRT00000000000000000031"
+name = "Task A"
+
+plan.duration = 3
+
+[[project.task]]
+dependencies = []
+id = "01ALRT00000000000000000032"
+name = "Task B"
+
+plan.duration = 4
+
+[[project.task]]
+dependencies = [
+  "01ALRT00000000000000000031",
+  "01ALRT00000000000000000032",
+]
+id = "01ALRT00000000000000000033"
+name = "Task C"
+
+plan.duration = 2

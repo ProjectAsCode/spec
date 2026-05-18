@@ -1,0 +1,37 @@
+[meta]
+spec_version = "0.0.1"
+
+# Three tasks in strict sequence: T001 -> T002 -> T003
+# E values: T001=3.0, T002=3.0, T003=4.0
+# Expected: T001 ES=0 EF=3, T002 ES=3 EF=6, T003 ES=6 EF=10
+
+[[project]]
+color = "#3B82F6"
+id = "01CPMF00000000000000000001"
+name = "CPM Forward - Linear Chain"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01CPMF00000000000000000002"
+name = "Task A"
+
+plan.duration = 3
+
+[[project.task]]
+dependencies = [
+  "01CPMF00000000000000000002",
+]
+id = "01CPMF00000000000000000003"
+name = "Task B"
+
+plan.duration = 2
+
+[[project.task]]
+dependencies = [
+  "01CPMF00000000000000000003",
+]
+id = "01CPMF00000000000000000004"
+name = "Task C"
+
+plan.duration = 4

@@ -1,0 +1,26 @@
+[meta]
+spec_version = "0.0.1"
+
+# INVALID: Two tasks with the same id within the same project.
+# All ids must be unique within a project (and its sub-projects).
+# Expected: validation error, file rejected.
+
+[[project]]
+color = "#3B82F6"
+id = "01VRFY00000000000000000010"
+name = "Duplicate ID Test"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01VRFY00000000000000000011"
+name = "Task A"
+
+plan.duration = 3
+
+[[project.task]]
+dependencies = []
+id = "01VRFY00000000000000000011"
+name = "Task B (duplicate id)"
+
+plan.duration = 5

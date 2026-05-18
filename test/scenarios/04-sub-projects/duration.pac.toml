@@ -1,0 +1,51 @@
+[meta]
+spec_version = "0.0.1"
+
+# Sub-project duration test.
+#
+# Parent project (days) has one task linked to the sub-project.
+# Sub-project (days) has two tasks in sequence: STASK1 -> STASK2.
+#
+# Sub-project forward pass:
+#   STASK1: ES=0, EF=5  (plan.duration = 5)
+#   STASK2: ES=5, EF=12 (plan.duration = 7)
+#   Sub-project total duration = max(EF) = 12
+#
+# The linked task in the parent project uses this computed value (12) as
+# its effective duration, regardless of its stored plan.duration field.
+
+[[project]]
+color = "#3B82F6"
+id = "01SPRJ00000000000000000001"
+name = "Sub-project Duration - Parent"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01SPRJ00000000000000000002"
+name = "Backend API (sub-project linked)"
+sub_project_id = "01SPRJ00000000000000000010"
+
+[[project]]
+color = "#10B981"
+id = "01SPRJ00000000000000000010"
+linked_task_id = "01SPRJ00000000000000000002"
+name = "Backend API Sub-project"
+parent_project_id = "01SPRJ00000000000000000001"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01SPRJ00000000000000000011"
+name = "API Schema Design"
+
+plan.duration = 5
+
+[[project.task]]
+dependencies = [
+  "01SPRJ00000000000000000011",
+]
+id = "01SPRJ00000000000000000012"
+name = "Core Implementation"
+
+plan.duration = 7

@@ -1,0 +1,20 @@
+[meta]
+spec_version = "0.0.1"
+
+# VALID: priority can be negative (range is -100 to 100).
+# Negative priority means the task runs later within a track under parallelism constraints.
+# Expected: accepted, no error.
+
+[[project]]
+color = "#3B82F6"
+id = "01VRFY00000000000000000095"
+name = "Negative Priority - Valid"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01VRFY00000000000000000096"
+name = "Deprioritised task"
+priority = -50
+
+plan.duration = 3

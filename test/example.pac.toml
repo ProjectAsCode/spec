@@ -1,0 +1,490 @@
+[meta]
+spec_version = "0.0.1"
+
+# ============================================================
+# TOP-LEVEL PROJECT: E-Commerce Platform Launch
+# time_unit = "days"
+# Covers all PAC spec features.
+# ============================================================
+
+[[project]]
+color = "#3B82F6"
+description = "Full platform rebuild: backend API, frontend storefront, and mobile app. Covers all PAC spec features."
+id = "01JPAC0000000000PRJCT00001"
+name = "E-Commerce Platform Launch"
+time_unit = "days"
+
+# ---- TRACKS ----
+
+[[project.track]]
+color = "#10B981"
+description = "Server-side API development team"
+id = "01JPAC0000000000TRACK00001"
+name = "Backend"
+order = 0
+parallelism = 2
+project_id = "01JPAC0000000000PRJCT00001"
+
+[[project.track]]
+color = "#8B5CF6"
+description = "React storefront team"
+id = "01JPAC0000000000TRACK00002"
+name = "Frontend"
+order = 1
+parallelism = 2
+project_id = "01JPAC0000000000PRJCT00001"
+
+[[project.track]]
+color = "#F59E0B"
+description = "Mobile app team (iOS and Android)"
+id = "01JPAC0000000000TRACK00003"
+name = "Mobile"
+order = 2
+parallelism = 1
+project_id = "01JPAC0000000000PRJCT00001"
+
+[[project.track]]
+color = "#EF4444"
+description = "Quality assurance; unlimited parallelism"
+id = "01JPAC0000000000TRACK00004"
+name = "QA"
+order = 3
+parallelism = 0
+project_id = "01JPAC0000000000PRJCT00001"
+
+# ---- TASKS ----
+# Tasks sorted by id alphabetically.
+
+# T001 - Done (actual.duration set)
+[[project.task]]
+dependencies = []
+description = "Gather stakeholder requirements and define MVP feature set."
+id = "01JPAC0000000000TASK000001"
+name = "Requirements Gathering"
+priority = 100
+track_id = "01JPAC0000000000TRACK00001"
+
+plan.duration = 5
+
+actual.duration = 8
+actual.progress = 100
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000TASK000001",
+]
+description = "Design system architecture, choose infrastructure stack."
+id = "01JPAC0000000000TASK000002"
+name = "Architecture Design"
+priority = 90
+track_id = "01JPAC0000000000TRACK00001"
+
+plan.duration = 5
+
+actual.duration = 5
+actual.offset = 3
+actual.progress = 100
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000TASK000002",
+]
+description = "Full backend API implementation. Expanded into a sub-project."
+id = "01JPAC0000000000TASK000003"
+name = "Backend API (sub-project)"
+priority = 80
+sub_project_id = "01JPAC0000000000PRJCT00002"
+track_id = "01JPAC0000000000TRACK00001"
+
+plan.duration = 15
+
+actual.duration = 20
+actual.offset = 3
+actual.progress = 100
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000TASK000002",
+]
+description = "Build React component library and design system."
+id = "01JPAC0000000000TASK000004"
+name = "Frontend Design System"
+notes = "Design tokens and Storybook in progress. Behind schedule."
+priority = 70
+track_id = "01JPAC0000000000TRACK00002"
+
+plan.duration = 20
+
+actual.offset = 3
+actual.progress = 35
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000TASK000002",
+]
+description = "Set up CI/CD pipeline and deployment infrastructure."
+id = "01JPAC0000000000TASK000005"
+name = "DevOps Setup"
+track_id = "01JPAC0000000000TRACK00001"
+
+plan.duration = 12
+
+actual.offset = 3
+actual.progress = 60
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000TASK000003",
+]
+description = "Write end-to-end test suite for API endpoints."
+id = "01JPAC0000000000TASK000006"
+name = "API Integration Tests"
+priority = -10
+track_id = "01JPAC0000000000TRACK00004"
+
+plan.duration = 8
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000TASK000003",
+  "01JPAC0000000000TASK000004",
+]
+description = "Connect React storefront to backend APIs."
+id = "01JPAC0000000000TASK000007"
+name = "Frontend-Backend Integration"
+priority = 100
+track_id = "01JPAC0000000000TRACK00002"
+
+plan.duration = 10
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000TASK000002",
+]
+description = "Native mobile app for iOS and Android."
+id = "01JPAC0000000000TASK000008"
+name = "Mobile App Development"
+notes = "iOS build delayed by App Store review tooling issues."
+priority = 60
+sub_project_id = "01JPAC0000000000PRJCT00003"
+track_id = "01JPAC0000000000TRACK00003"
+
+plan.duration = 25
+
+actual.offset = 25
+actual.progress = 20
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000TASK000007",
+  "01JPAC0000000000TASK000008",
+]
+description = "Full regression testing across all platforms."
+id = "01JPAC0000000000TASK000009"
+name = "QA Full Regression"
+track_id = "01JPAC0000000000TRACK00004"
+
+plan.duration = 10
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000TASK000009",
+]
+description = "Prepare marketing materials, press release, and launch communications."
+id = "01JPAC0000000000TASK000010"
+name = "Launch Communications"
+
+plan.duration = 5
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000TASK000001",
+]
+description = "Migrate historical order data from legacy system."
+id = "01JPAC0000000000TASK000011"
+name = "Legacy Data Migration"
+priority = -50
+track_id = "01JPAC0000000000TRACK00001"
+
+plan.duration = 8
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000TASK000009",
+  "01JPAC0000000000TASK000010",
+  "01JPAC0000000000TASK000011",
+]
+description = "Go-live: deploy to production and enable traffic."
+id = "01JPAC0000000000TASK000012"
+name = "Production Launch"
+priority = 100
+
+plan.duration = 1
+
+[[project.milestone]]
+color = "#10B981"
+dependencies = [
+  "01JPAC0000000000TASK000002",
+  "01JPAC0000000000TASK000005",
+]
+description = "Architecture and DevOps setup approved by all leads."
+id = "01JPAC0000000000MSTNE00001"
+name = "Architecture Approved"
+project_id = "01JPAC0000000000PRJCT00001"
+
+# M002 - Reached milestone (all predecessor tasks have actual.progress = 100)
+[[project.milestone]]
+color = "#3B82F6"
+dependencies = [
+  "01JPAC0000000000TASK000003",
+]
+description = "Backend API complete and deployed to staging."
+id = "01JPAC0000000000MSTNE00002"
+name = "Backend Complete"
+project_id = "01JPAC0000000000PRJCT00001"
+
+# M003 - MILESTONE LATE - CRITICAL: past LS date, not reached, float = 0
+[[project.milestone]]
+color = "#EF4444"
+dependencies = [
+  "01JPAC0000000000TASK000007",
+  "01JPAC0000000000TASK000008",
+]
+description = "All platforms integrated and ready for QA."
+id = "01JPAC0000000000MSTNE00003"
+name = "Integration Complete"
+project_id = "01JPAC0000000000PRJCT00001"
+
+# M004 - Future milestone, no alert
+[[project.milestone]]
+color = "#F59E0B"
+dependencies = [
+  "01JPAC0000000000TASK000012",
+]
+description = "Platform is live and serving customers."
+id = "01JPAC0000000000MSTNE00004"
+name = "Platform Live"
+project_id = "01JPAC0000000000PRJCT00001"
+
+# ============================================================
+# SUB-PROJECT: Backend API
+# Linked to task T003 in the parent project.
+# time_unit = "days" (same as parent)
+# ============================================================
+
+[[project]]
+color = "#10B981"
+description = "Detailed backend API tasks broken out from the main project."
+id = "01JPAC0000000000PRJCT00002"
+linked_task_id = "01JPAC0000000000TASK000003"
+name = "Backend API"
+parent_project_id = "01JPAC0000000000PRJCT00001"
+time_unit = "days"
+
+[[project.track]]
+color = "#10B981"
+id = "01JPAC0000000000TRACK00011"
+name = "API Development"
+order = 0
+parallelism = 2
+project_id = "01JPAC0000000000PRJCT00002"
+
+[[project.track]]
+color = "#6366F1"
+id = "01JPAC0000000000TRACK00012"
+name = "Data Layer"
+order = 1
+parallelism = 1
+project_id = "01JPAC0000000000PRJCT00002"
+
+[[project.task]]
+dependencies = []
+description = "Define all API contracts and OpenAPI schema."
+id = "01JPAC0000000000STSK000001"
+name = "API Schema Design"
+priority = 100
+track_id = "01JPAC0000000000TRACK00011"
+
+plan.duration = 5
+
+actual.duration = 6
+actual.progress = 100
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000STSK000001",
+]
+description = "Set up PostgreSQL schema and ORM models."
+id = "01JPAC0000000000STSK000002"
+name = "Database Schema"
+priority = 80
+track_id = "01JPAC0000000000TRACK00012"
+
+plan.duration = 6
+
+actual.duration = 5
+actual.offset = 1
+actual.progress = 100
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000STSK000001",
+]
+description = "Implement authentication and authorisation layer."
+id = "01JPAC0000000000STSK000003"
+name = "Auth Service"
+priority = 90
+track_id = "01JPAC0000000000TRACK00011"
+
+plan.duration = 8
+
+actual.duration = 9
+actual.offset = 1
+actual.progress = 100
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000STSK000002",
+  "01JPAC0000000000STSK000003",
+]
+description = "Product catalogue, cart, checkout, and order management endpoints."
+id = "01JPAC0000000000STSK000004"
+name = "Core Endpoints"
+priority = 70
+track_id = "01JPAC0000000000TRACK00011"
+
+plan.duration = 6
+
+actual.duration = 5
+actual.offset = 2
+actual.progress = 100
+
+[[project.milestone]]
+color = "#10B981"
+dependencies = [
+  "01JPAC0000000000STSK000004",
+]
+id = "01JPAC0000000000SMSTNE0001"
+name = "API Ready"
+project_id = "01JPAC0000000000PRJCT00002"
+
+# ============================================================
+# SUB-PROJECT: Mobile App (nested inside E-Commerce Platform)
+# Linked to task T008.
+# time_unit = "days" (same as parent)
+# ============================================================
+
+[[project]]
+color = "#F59E0B"
+description = "Mobile app development for iOS and Android."
+id = "01JPAC0000000000PRJCT00003"
+linked_task_id = "01JPAC0000000000TASK000008"
+name = "Mobile App"
+parent_project_id = "01JPAC0000000000PRJCT00001"
+time_unit = "days"
+
+[[project.track]]
+color = "#F59E0B"
+id = "01JPAC0000000000TRACK00021"
+name = "iOS"
+order = 0
+parallelism = 1
+project_id = "01JPAC0000000000PRJCT00003"
+
+[[project.track]]
+color = "#EC4899"
+id = "01JPAC0000000000TRACK00022"
+name = "Android"
+order = 1
+parallelism = 1
+project_id = "01JPAC0000000000PRJCT00003"
+
+[[project.task]]
+dependencies = []
+description = "Core navigation, design system integration, and app shell."
+id = "01JPAC0000000000MTSK000001"
+name = "App Shell"
+priority = 100
+track_id = "01JPAC0000000000TRACK00021"
+
+plan.duration = 7
+
+actual.duration = 9
+actual.progress = 100
+
+[[project.task]]
+dependencies = []
+description = "Android version of app shell."
+id = "01JPAC0000000000MTSK000002"
+name = "Android App Shell"
+priority = 90
+track_id = "01JPAC0000000000TRACK00022"
+
+plan.duration = 7
+
+actual.duration = 9
+actual.progress = 100
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000MTSK000001",
+]
+description = "Product listing, search, and cart on iOS."
+id = "01JPAC0000000000MTSK000003"
+name = "Core Screens iOS"
+priority = 80
+track_id = "01JPAC0000000000TRACK00021"
+
+plan.duration = 15
+
+actual.offset = 2
+actual.progress = 20
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000MTSK000002",
+]
+description = "Product listing, search, and cart on Android."
+id = "01JPAC0000000000MTSK000004"
+name = "Core Screens Android"
+priority = 80
+track_id = "01JPAC0000000000TRACK00022"
+
+plan.duration = 15
+
+actual.offset = 2
+actual.progress = 20
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000MTSK000003",
+  "01JPAC0000000000MTSK000004",
+]
+description = "Integrate push notifications for order updates."
+id = "01JPAC0000000000MTSK000005"
+name = "Push Notifications"
+priority = 50
+
+plan.duration = 5
+
+[[project.task]]
+dependencies = [
+  "01JPAC0000000000MTSK000003",
+  "01JPAC0000000000MTSK000004",
+  "01JPAC0000000000MTSK000005",
+]
+description = "Mobile app QA, device testing, and App Store submission."
+id = "01JPAC0000000000MTSK000006"
+name = "Mobile QA and Submission"
+priority = 100
+
+plan.duration = 10
+
+[[project.milestone]]
+color = "#F59E0B"
+dependencies = [
+  "01JPAC0000000000MTSK000006",
+]
+id = "01JPAC0000000000MMSTNE0001"
+name = "App Submitted"
+project_id = "01JPAC0000000000PRJCT00003"

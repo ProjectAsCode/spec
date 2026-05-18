@@ -1,0 +1,19 @@
+[meta]
+spec_version = "0.0.1"
+
+# VALID: tasks with empty dependencies array.
+# dependencies = [] is always required in the file (even when empty).
+# Expected: accepted, tasks start at ES=0.
+
+[[project]]
+color = "#3B82F6"
+id = "01VRFY00000000000000000090"
+name = "Empty Dependencies - Valid"
+time_unit = "days"
+
+[[project.task]]
+dependencies = []
+id = "01VRFY00000000000000000091"
+name = "Task with no dependencies"
+
+plan.duration = 3

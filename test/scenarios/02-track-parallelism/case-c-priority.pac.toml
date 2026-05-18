@@ -1,0 +1,40 @@
+[meta]
+spec_version = "0.0.1"
+
+# parallelism = 1: two tasks, different priorities, no deps.
+# Task A has priority=0 (low), Task B has priority=10 (high).
+# Higher priority runs first. Task A is delayed even though it has the smaller id.
+# Expected:
+#   Task B (id=...023) ES=0  EF=3.0  (higher priority, runs first)
+#   Task A (id=...022) ES=3.0 EF=6.0  (lower priority, delayed)
+
+[[project]]
+color = "#3B82F6"
+id = "01TPAR00000000000000000020"
+name = "Track Parallelism - Priority"
+time_unit = "days"
+
+[[project.track]]
+color = "#10B981"
+id = "01TPAR00000000000000000021"
+name = "Dev"
+order = 0
+parallelism = 1
+project_id = "01TPAR00000000000000000020"
+
+[[project.task]]
+dependencies = []
+id = "01TPAR00000000000000000022"
+name = "Task A (low priority)"
+track_id = "01TPAR00000000000000000021"
+
+plan.duration = 3
+
+[[project.task]]
+dependencies = []
+id = "01TPAR00000000000000000023"
+name = "Task B (high priority)"
+priority = 10
+track_id = "01TPAR00000000000000000021"
+
+plan.duration = 3
